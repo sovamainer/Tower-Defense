@@ -7,6 +7,16 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QLa
 from корзина import Tziv
 
 
+def choose_your_personaluty():
+    global ex
+    if ex == 'log':
+        ex = Login()
+        ex.show()
+    if ex == 'form1':
+        ex_w = FirstForm()
+        ex_w.show()
+
+
 class Login(QWidget):
     def __init__(self):
         super().__init__()
@@ -110,8 +120,9 @@ class FirstForm(QMainWindow):
         self.form3.show()
 
     def quit(self):
-        ex = Login()
-        ex.show()
+        global ex
+        ex = 'log'
+        choose_your_personaluty()
 
 
 def except_hook(cls, exception, traceback):
@@ -121,7 +132,6 @@ def except_hook(cls, exception, traceback):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     sys.excepthook = except_hook
-    ex = FirstForm()
-    ex.show()
-    form1 = Login()
+    ex = 'log'
+    choose_your_personaluty()
     sys.exit(app.exec())
